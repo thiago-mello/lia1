@@ -4,7 +4,7 @@ import aiofiles
 import os
 import html2text
 from helpers.image_finder import get_image_url
-from services.authenticate import get_project_folder_id, create_a_file
+from services.authenticate import get_project_folder_id, create_a_file, create_a_folder
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
@@ -23,7 +23,7 @@ async def fetch_project(session, project_id):
 
 
 async def fetch_images(session, project_data, drive_service, project_folder_id):
-    image_folder_id = get_project_folder_id(drive_service, 'images', project_folder_id)
+    image_folder_id = create_a_folder(drive_service, 'images', project_folder_id)["id"]
     async with session.get(project_data['images_url']) as response:
         images = await response.json()
         image_requests = []
@@ -53,7 +53,7 @@ async def download_image(session, image, project_id, image_folder_id, drive_serv
 
 
 async def fetch_files(session, project_data, drive_service, project_folder_id):
-    files_folder_id = get_project_folder_id(drive_service, 'files', project_folder_id)
+    files_folder_id = create_a_folder(drive_service, 'files', project_folder_id)["id"]
     async with session.get(project_data['files_url']) as response:
         files = await response.json()
         file_requests = []

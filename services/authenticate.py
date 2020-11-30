@@ -49,18 +49,7 @@ def garant_folder_existence(drive_service, folder_name, parent, exception_if_exi
             raise Exception("ja tinha pasta de projeto")
         return folder_id
 
-    if parent:
-        folder_metadata = {
-            'name': folder_name,
-            'mimeType': 'application/vnd.google-apps.folder',
-            'parents': [parent]
-        }   
-    else:
-        folder_metadata = {
-            'name': folder_name,
-            'mimeType': 'application/vnd.google-apps.folder'
-        }  
-    folder = create_a_folder(drive_service, folder_metadata)
+    folder = create_a_folder(drive_service, folder_name, parent)
     return folder.get('id')
 
 def get_id_if_file_exists(drive_service, query_str):
@@ -81,8 +70,19 @@ def get_id_if_file_exists(drive_service, query_str):
         if page_token is None:
             break
 
-def create_a_folder(drive_service, file_metadata):
-    return drive_service.files().create(body=file_metadata).execute()
+def create_a_folder(drive_service, folder_name, parent):
+    if parent:
+        folder_metadata = {
+            'name': folder_name,
+            'mimeType': 'application/vnd.google-apps.folder',
+            'parents': [parent]
+        }   
+    else:
+        folder_metadata = {
+            'name': folder_name,
+            'mimeType': 'application/vnd.google-apps.folder'
+        }  
+    return drive_service.files().create(body=folder_metadata).execute()
 
 def create_a_file(drive_service, file_metadata, file_media):
     return drive_service.files().create(body=file_metadata, media_body=file_media).execute()
