@@ -6,7 +6,7 @@ This is a script for extracting data from Thingiverse. The scripts collects data
 
 1. Clone this repo
 2. Create a Python virtual env with `virtualenv virualenvname`
-3. Activate the Virtual env with `source virtualenvname/bin/activate` on Mac/Linux.
+3. Activate the Virtual env with `source virtualenvname/bin/activate` on Mac/Linux, or `virtualenvname\scripts\activate` on Windows
 4. Install the dependencies with `pip install -r requirements.txt`
 5. You're ready to Go!
 
