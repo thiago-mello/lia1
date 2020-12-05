@@ -7,7 +7,7 @@ import os
 import sys
 sys.path.append('.')
 
-API_TOKEN = '56edfc79ecf25922b98202dd79a291aa'
+API_TOKEN = '2cf5af8ad1db62516b66b0262b590432'
 
 
 async def fetch_project_data(project_id):
