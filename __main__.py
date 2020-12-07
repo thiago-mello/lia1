@@ -6,13 +6,15 @@ import aiofiles
 import asyncio
 import os
 import sys
+import shutil
 sys.path.append('.')
 
 API_TOKEN = '56edfc79ecf25922b98202dd79a291aa'
 
 
 async def fetch_project_data(project_id, drive_service, global_folder_id):
-    project_folder_id = get_project_folder_id(drive_service, project_id, global_folder_id)
+    project_folder_id = get_project_folder_id(
+        drive_service, project_id, global_folder_id)
     async with aiohttp.ClientSession(headers={'Authorization': f'Bearer {API_TOKEN}'}) as session:
         project = await fetch_project(session, project_id)
 
@@ -22,6 +24,7 @@ async def fetch_project_data(project_id, drive_service, global_folder_id):
             print('Could not create project folder.')
 
         await asyncio.gather(fetch_images(session, project, drive_service, project_folder_id), fetch_files(session, project, drive_service, project_folder_id), write_texts_to_files(project, drive_service, project_folder_id))
+        shutil.rmtree(f'./temp/{project_id}')
 
 
 async def main():
@@ -34,7 +37,8 @@ async def main():
         for project_string in project_strings:
 
             project_id = parse_project(project_string)
-            project_tasks.append(fetch_project_data(project_id, drive_service, global_folder_id))
+            project_tasks.append(fetch_project_data(
+                project_id, drive_service, global_folder_id))
 
         await asyncio.gather(*project_tasks)
 

@@ -1,15 +1,19 @@
 ## Python 'Thingiverse Extractor'
 
-This is a script for extracting data from Thingiverse. The scripts collects data about 3D printing projects hosted at Thingiverse.
+Esse é um script para a extração automatica de dados do Thingiverse. O Script coleta informações de projetos de impressão 3d hospedados no Thingiverse e as salva em arquivos no Google Drive.
 
-### How to setup the project:
+### Como configurar o Projeto:
 
-1. Clone this repo
-2. Create a Python virtual env with `virtualenv virualenvname`
-3. Activate the Virtual env with `source virtualenvname/bin/activate` on Mac/Linux.
-4. Install the dependencies with `pip install -r requirements.txt`
-5. You're ready to Go!
+Para executar o projeto você precisará do Python versão 3.5 ou mais recente, bem como o gerenciador de pacotes pip. Além disso, os comandos aqui mostrados são executados com o auxílio do [virtualenv](https://virtualenv.pypa.io/en/latest/). Siga então os seguintes passos.
 
-### How to run the script:
+1. Clone este repositório
+2. Crie um _virtual env_ do Python com o comando `virtualenv nomeDoViertualenv`, onde `nomeDoVirtualenv` é um nome de sua escolha.
+3. Inicie o _virtual env_ com o comando `source nomeDoViertualenv/bin/activate` no Mac/Linux, onde `nomeDoViertualenv` é o nome escolhido no passo anterior.
+4. Intstale as dependências do projeto com o comando `pip install -r requirements.txt`
+5. Tudo pronto!
 
-To run the script simply execute the command `python . projects`. You can pass the Thingiverse url or the project id as arguments. You can enter more than one project at once.
+### Como executar o script:
+
+Para executar o script basta executar o comando `python . projetoId`, onde `projetoId` é o identificador numérico do projeto no Thingiverse, ou sua URL.
+
+Caso seja a primeira execução do script, uma janela do navegador será mostrada para que se autentique na sua conta do Google e conceda ao script permissão para que acesse seu Drive.
